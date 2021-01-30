@@ -43,18 +43,21 @@ def add_person(persons):
 # Skriver man ett index som inte finns, får man meddelande om detta.
 # Skriver man något annat än en siffra får man meddelande om detta.
 def remove_person(persons):
-    print('Visar index för alla användare: ')
-    for index, row in enumerate(persons):
-        print(index, f'{row["Användarnamn"]} {row["Förnamn"]} {row["Efternamn"]} {row["epost"]}')
-    while True:
-        try:
-            remove_user = int(input('Ange index för den du vill ta bort: '))
-            persons.pop(remove_user)
-            break
-        except ValueError:
-            print('Du måste ange en siffra för index, försök igen. ')
-        except IndexError:
-            print('Index du angav finns inte, försök igen. ')
+    if len(persons) > 0:
+        print('Visar index för alla användare: ')
+        for index, row in enumerate(persons):
+            print(index, f'{row["Användarnamn"]} {row["Förnamn"]} {row["Efternamn"]} {row["epost"]}')
+        while True:
+            try:
+                remove_user = int(input('Ange index för den du vill ta bort: '))
+                persons.pop(remove_user)
+                break
+            except ValueError:
+                print('Du måste ange en siffra för index, försök igen. ')
+            except IndexError:
+                print('Index du angav finns inte, försök igen. ')
+    else:
+        print('\nDu har inga användare inlästa ännu. Läs in en fil eller lägg till en användare först. ')    
 
 # Sparar persons till labb2-personser.json
 # Om man inte läst in originalfilen ännu (dvs persons är tom) får man meddelande om att man inte kan spara en tom fil.
